@@ -13,19 +13,22 @@ const allowedOrigins = [
   process.env.ADMIN_URL,
   'http://localhost:5173',
   'http://localhost:5174',
-  'http://127.0.0.1:5173',
-  'http://127.0.0.1:5174',
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // allow Postman / server-to-server
+    console.log("Incoming origin:", origin);
 
-    if (allowedOrigins.includes(origin)) {
+    if (!origin) return callback(null, true);
+
+    // normalize origin (remove trailing slash)
+    const normalizedOrigin = origin.replace(/\/$/, '');
+
+    if (allowedOrigins.includes(normalizedOrigin)) {
       return callback(null, true);
     } else {
-      console.log("❌ CORS Blocked:", origin);
-      return callback(new Error("Not allowed by CORS"));
+      console.log("❌ CORS BLOCKED:", normalizedOrigin);
+      return callback(new Error("CORS not allowed"));
     }
   },
   credentials: true
