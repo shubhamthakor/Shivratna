@@ -1,0 +1,30 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose-deep:#e879a0;--sapphire:#0ea5e9;--sapphire-dark:#0369a1;
+  --pink-soft:#fdf2f8;--blue-soft:#f0f9ff;--offwhite:#fafafa;
+  --text:#1e293b;--text-mid:#475569;--text-light:#94a3b8;
+  --border:#e2e8f0;--border-soft:#f1f5f9;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md:0 4px 16px rgba(14,165,233,0.10);
+  --shadow-lg:0 20px 48px rgba(14,165,233,0.14);
+  --radius:16px;--radius-lg:24px;
+  --font-d:'Playfair Display',Georgia,serif;
+  --font-b:'DM Sans',sans-serif;
+  --grad-primary:linear-gradient(135deg,var(--rose-deep),var(--sapphire));
+  --grad-card:linear-gradient(135deg,rgba(249,168,212,0.15),rgba(186,230,253,0.15));
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--offwhite);color:var(--text);overflow-x:hidden;font-size:15px;line-height:1.7}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#f1f5f9}
+::-webkit-scrollbar-thumb{background:var(--grad-primary);border-radius:99px}
+a{text-decoration:none;color:inherit}
+button{font-family:var(--font-b);cursor:pointer}
+img{display:block;max-width:100%}
+
+/* ── RESPONSIVE BREAKPOINTS ── */
+/* xs: <480px  sm: 480-768px  md: 768-1024px  lg: 1024-1280px  xl: >1280px */
+
+/* Utility: hide on mobile */
+@media(max-width:767px){.hide-mobile{display:none!important}}
+@media(min-width:768px){.hide-desktop{display:none!important}}
