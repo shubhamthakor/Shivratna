@@ -4,11 +4,24 @@ const protect  = require('../middleware/auth');
 const nodemailer = require('nodemailer');
 
 // ── EMAIL SETUP ───────────────────────────────────────────────────────────────
+// function createTransporter() {
+//   return nodemailer.createTransport({
+//     host: "smtp.gmail.com",
+//     port: 465,
+//     secure: false, // IMPORTANT
+//     auth: {
+//       user: process.env.EMAIL_USER,
+//       pass: process.env.EMAIL_PASS,
+//     },
+//   });
+// }
+
+// ── EMAIL SETUP ───────────────────────────────────────────────────────────────
 function createTransporter() {
   return nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // IMPORTANT
+    port: 465,       // CHANGED FROM 587
+    secure: true,    // CHANGED FROM false
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -65,7 +78,7 @@ router.post('/', async (req, res) => {
     const inquiry = await Inquiry.create({ gemName, name, phone, email, carat, message, source });
 
     // Send email (non-blocking — don't fail if email fails)
-    sendInquiryEmail(inquiry).catch(err => console.error('Email error:', err.message));
+    sendInquiryEmail(inquiry).catch(err => console.error('NODEMAILER FULL ERROR:', err));
 
     res.status(201).json({ success: true, message: 'Inquiry submitted! We will contact you within 24 hours.' });
   } catch (err) {
