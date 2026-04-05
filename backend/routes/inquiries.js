@@ -29,12 +29,13 @@ async function sendInquiryEmail(inquiry) {
     </div>
   `;
 
-  const msg = {
-    to: process.env.EMAIL_TO,
-    from: process.env.EMAIL_USER, // MUST be verified in SendGrid
-    subject: `💎 New Inquiry: ${inquiry.gemName} — ${inquiry.name}`,
-    html,
-  };
+    const msg = {
+      to: process.env.EMAIL_TO,
+      from: process.env.EMAIL_USER,
+      replyTo: inquiry.email || process.env.EMAIL_TO, // 🔥 IMPORTANT
+      subject: `New Inquiry - ${Date.now()}`,
+      html,
+    };
 
   try {
     await sgMail.send(msg);
